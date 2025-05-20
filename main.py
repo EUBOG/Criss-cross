@@ -3,11 +3,35 @@ from tkinter import messagebox
 
 window = tk.Tk()
 window.title("Крестики-нолики")
-window.geometry("300x350")
+window.geometry("300x300")
+
+# Центрируем окно на экране (опционально)
+window.update_idletasks()
+width = window.winfo_width()
+height = window.winfo_height()
+x = (window.winfo_screenwidth() // 2) - (width // 2)
+y = (window.winfo_screenheight() // 2) - (height // 2)
+window.geometry(f"{width}x{height}+{x}+{y}")
 
 current_player = "X"
 buttons = []
 
+# Создаем фрейм для игрового поля и размещаем его по центру
+frame = tk.Frame(window)
+frame.grid(row=1, column=1)
+
+# Делаем так, чтобы фрейм был по центру окна
+window.grid_rowconfigure(0, weight=1)
+window.grid_rowconfigure(1, weight=1)
+window.grid_rowconfigure(2, weight=1)
+window.grid_columnconfigure(0, weight=1)
+window.grid_columnconfigure(1, weight=1)
+window.grid_columnconfigure(2, weight=1)
+
+# Конфигурируем строки и колонки внутри frame для равномерного распределения
+for i in range(3):
+    frame.grid_rowconfigure(i, weight=1)
+    frame.grid_columnconfigure(i, weight=1)
 
 def check_winner():
    for i in range(3):
